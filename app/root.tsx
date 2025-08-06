@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 
+// @NOTICE: This is a React Router component that adds links to the head of the document
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
   {
@@ -30,12 +31,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
+        <Meta /> // @NOTICE: This is a React Router component that adds meta tags to the head of the document
+        <Links /> // @NOTICE: This is a React Router component that adds links to the head of the document
       </head>
       <body>
         {children}
-        <ScrollRestoration />
+        <ScrollRestoration /> // @NOTICE: This is a React Router component that restores the scroll position when the user navigates back to a page
         <Scripts />
       </body>
     </html>
