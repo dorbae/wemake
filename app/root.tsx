@@ -23,6 +23,7 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// @NOTICE: {children} will be replaced by the compoenent that is rendered by the route
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -41,6 +42,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   );
 }
 
+// @NOTICE: Oulet component will be replaced by the route one
 export default function App() {
   return <Outlet />;
 }
