@@ -48,6 +48,7 @@ export default function App() {
   return <Outlet />;
 }
 
+// @NOTICE: This is a React Router component that displays an error message when the route fails to load.
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
