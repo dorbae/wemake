@@ -6,3 +6,14 @@ export default function AboutUs() {
         </div>
     )
 }
+
+export const links = () => [
+    {rel: "stylesheet", href: "potato.com"}
+];
+
+export const meta = () => {
+    return [
+        {title: "Tomato"},
+        {name: "description", content: "Tomato"},
+    ];
+};
