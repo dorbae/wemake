@@ -58,3 +58,10 @@
     --chart-5: 340 75% 55%;
   }
 }
+
+/* @NOTICE: Apply dark mode based on system preference */
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
