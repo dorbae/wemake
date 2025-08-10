@@ -1,0 +1,122 @@
+# PR 제목 prefix 기반 자동 label 설정
+# 형식: prefix: label명
+
+# 새로운 기능 추가
+feat:
+  - 'feat:'
+  - 'feature:'
+  - '✨'
+  - '🚀'
+
+# 버그 수정
+fix:
+  - 'fix:'
+  - 'bugfix:'
+  - 'hotfix:'
+  - '🐛'
+  - '🚨'
+
+# 코드 리팩토링
+refactor:
+  - 'refactor:'
+  - 'refactoring:'
+  - '♻️'
+  - '🔧'
+
+# 문서 수정
+docs:
+  - 'docs:'
+  - 'documentation:'
+  - '📚'
+  - '📖'
+
+# 코드 스타일 수정
+style:
+  - 'style:'
+  - 'formatting:'
+  - '💄'
+  - '🎨'
+
+# 테스트 코드
+test:
+  - 'test:'
+  - 'testing:'
+  - '✅'
+  - '🧪'
+
+# 빌드/설정 관련
+chore:
+  - 'chore:'
+  - 'build:'
+  - 'ci:'
+  - 'config:'
+  - '🔧'
+  - '⚙️'
+
+# 성능 개선
+perf:
+  - 'perf:'
+  - 'performance:'
+  - '⚡'
+  - '🚀'
+
+# 보안 관련
+security:
+  - 'security:'
+  - 'sec:'
+  - '🔒'
+  - '🛡️'
+
+# 의존성 업데이트
+deps:
+  - 'deps:'
+  - 'dependency:'
+  - 'update:'
+  - '📦'
+  - '⬆️'
+
+# 브레이킹 체인지
+breaking:
+  - 'breaking:'
+  - 'breaking-change:'
+  - '💥'
+  - '🚨'
+
+# 리팩토링 (코드 구조 개선)
+revert:
+  - 'revert:'
+  - 'undo:'
+  - '↩️'
+
+# 타입 관련
+types:
+  - 'types:'
+  - 'type:'
+  - '🔍'
+
+# 접근성 개선
+accessibility:
+  - 'a11y:'
+  - 'accessibility:'
+  - '♿'
+
+# 국제화
+i18n:
+  - 'i18n:'
+  - 'internationalization:'
+  - '🌍'
+
+# 모바일 관련
+mobile:
+  - 'mobile:'
+  - '📱'
+
+# 데스크톱 관련
+desktop:
+  - 'desktop:'
+  - '💻'
+
+# 웹 관련
+web:
+  - 'web:'
+  - '🌐'
