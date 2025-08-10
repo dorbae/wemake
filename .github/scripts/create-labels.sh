@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# GitHub 저장소에 label을 생성하는 스크립트
+# GitHub 저장소에 label을 생성하는 스크립트 (콜론 사용 불가)
 # 사용법: ./create-labels.sh
 
 # 색상 정의 - 일반 배열 사용
