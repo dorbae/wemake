@@ -61,15 +61,15 @@ jobs:
           TOTAL_CHANGES=$((ADDITIONS + DELETIONS))
           
           if [ $TOTAL_CHANGES -le 10 ]; then
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: XS"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size-XS"
           elif [ $TOTAL_CHANGES -le 30 ]; then
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: S"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size-S"
           elif [ $TOTAL_CHANGES -le 100 ]; then
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: M"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size-M"
           elif [ $TOTAL_CHANGES -le 500 ]; then
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: L"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size-L"
           else
-            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: XL"
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size-XL"
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
