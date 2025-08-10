@@ -1,0 +1,91 @@
+name: Auto Label PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Auto Label PR
+        uses: actions/labeler@v4
+        with:
+          configuration-path: .github/labeler.yml
+          sync-labels: true
+
+      - name: Set Priority Labels
+        run: |
+          # PR 제목에서 prefix 추출
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          
+          # 기본 label 설정
+          if [[ "$PR_TITLE" =~ ^(feat|feature): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "enhancement"
+          elif [[ "$PR_TITLE" =~ ^(fix|bugfix|hotfix): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "bug"
+          elif [[ "$PR_TITLE" =~ ^(docs|documentation): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "documentation"
+          elif [[ "$PR_TITLE" =~ ^(refactor|refactoring): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "enhancement"
+          elif [[ "$PR_TITLE" =~ ^(test|testing): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "testing"
+          elif [[ "$PR_TITLE" =~ ^(chore|build|ci|config): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "maintenance"
+          elif [[ "$PR_TITLE" =~ ^(perf|performance): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "enhancement"
+          elif [[ "$PR_TITLE" =~ ^(security|sec): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "security"
+          elif [[ "$PR_TITLE" =~ ^(deps|dependency|update): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "dependencies"
+          elif [[ "$PR_TITLE" =~ ^(breaking|breaking-change): ]]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "breaking-change"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Size Labels
+        run: |
+          # PR 크기에 따른 label 설정
+          ADDITIONS="${{ github.event.pull_request.additions }}"
+          DELETIONS="${{ github.event.pull_request.deletions }}"
+          TOTAL_CHANGES=$((ADDITIONS + DELETIONS))
+          
+          if [ $TOTAL_CHANGES -le 10 ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: XS"
+          elif [ $TOTAL_CHANGES -le 30 ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: S"
+          elif [ $TOTAL_CHANGES -le 100 ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: M"
+          elif [ $TOTAL_CHANGES -le 500 ]; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: L"
+          else
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "size: XL"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Status Labels
+        run: |
+          # PR 상태에 따른 label 설정
+          gh pr edit ${{ github.event.pull_request.number }} --add-label "needs-review"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set Priority Based on Labels
+        run: |
+          # 특정 label에 따른 우선순위 설정
+          PR_LABELS=$(gh pr view ${{ github.event.pull_request.number }} --json labels --jq '.labels[].name')
+          
+          if echo "$PR_LABELS" | grep -q "security\|breaking-change"; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "high-priority"
+          elif echo "$PR_LABELS" | grep -q "bug\|hotfix"; then
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "medium-priority"
+          else
+            gh pr edit ${{ github.event.pull_request.number }} --add-label "low-priority"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
