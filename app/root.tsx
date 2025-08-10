@@ -27,14 +27,14 @@ export const links: Route.LinksFunction = () => [
 // @NOTICE: {children} will be replaced by the compoenent that is rendered by the route
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta /> {/* @NOTICE: This is a React Router component that adds meta tags to the head of the document */}
         <Links /> {/* @NOTICE: This is a React Router component that adds links to the head of the document */}
       </head>
-      <body>
+      <body className="bg-background text-foreground min-h-screen">
         {children}
         <ScrollRestoration /> {/* @NOTICE: This is a React Router component that restores the scroll position when the user navigates back to a page */}
         <Scripts />
@@ -66,11 +66,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   }
 
   return (
-    <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
+    <main className="pt-16 p-4 container mx-auto bg-background text-foreground min-h-screen">
+      <h1 className="text-2xl font-bold mb-4">{message}</h1>
+      <p className="mb-4">{details}</p>
       {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
+        <pre className="w-full p-4 overflow-x-auto bg-muted text-muted-foreground rounded border border-border">
           <code>{stack}</code>
         </pre>
       )}
