@@ -1,5 +1,5 @@
 import { Separator } from "~/common/components/ui/separator";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger } from "~/common/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
 
 
@@ -94,7 +94,8 @@ const menus = [
     },
     {
         name: "IdeasGPT",
-        to: "/ideas"
+        to: "/ideas",
+        items: []
     },
     {
         name: "Teams",
@@ -126,7 +127,7 @@ export default function Navigation() {
      * - fixed: 네비게이션 바를 화면에 고정시킵니다.
      * - top-0 left-0 right-0: 상단, 좌측, 우측을 0으로 고정하여 전체 가로폭을 차지하게 합니다.
      * - z-50: z-index를 50으로 설정하여 다른 요소들 위에 표시합니다.
-     * - bg-background/50: 배경색을 Tailwind의 background 변수로 지정하고, 투명도를 50%로 설정합니다.
+     * - bg-background/50: 배경색을 Tailwind의 background 변수로 지 정하고, 투명도를 50%로 설정합니다.
      */
     return (
         <nav className="flex px-20 h-16 items-center justify-between backdrop-blur fixed top-0 left-0 right-0 z-50 bg-background/50">
@@ -138,6 +139,11 @@ export default function Navigation() {
                         {menus.map((menu) => (
                             <NavigationMenuItem key={menu.name}>
                                 <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                                <NavigationMenuContent>{menu.items.map((subMenu) => (
+                                    <NavigationMenuItem key={subMenu.name}>
+                                        <Link to={subMenu.to}>{subMenu.name}</Link>
+                                    </NavigationMenuItem>))}
+                                </NavigationMenuContent>
                             </NavigationMenuItem>
                         ))}
                     </NavigationMenuList>
