@@ -138,10 +138,46 @@ export default function Navigation() {
                         {menus.map((menu) => (
                             <NavigationMenuItem key={menu.name}>
                                 <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
-                                <NavigationMenuContent>{menu.items?.map((subMenu) => (
-                                    <NavigationMenuItem key={subMenu.name}>
-                                        <Link to={subMenu.to}>{subMenu.name}</Link>
-                                    </NavigationMenuItem>))}
+                                <NavigationMenuContent>
+                                    {/**
+                                    * className 설명:
+                                    * - grid: CSS Grid 레이아웃을 적용합니다.
+                                    * - w-[500px]: 너비를 500px로 고정합니다.
+                                    * - font-light: 폰트 두께를 얇게 설정합니다.
+                                    * - gap-3: 그리드 아이템 간의 간격을 0.75rem(12px)로 설정합니다.
+                                    * - p-4: 패딩을 1rem(16px)로 설정합니다.
+                                    * - grid-cols-2: 2열 그리드로 배치합니다.
+                                    */}
+                                    <ul className="grid w-[500px] font-light gap-3 p-4 grid-cols-2">{menu.items?.map((subMenu) => (
+                                        <NavigationMenuItem key={subMenu.name}>
+                                            {/**
+                                             * className 설명:
+                                             * - p-3: 패딩을 0.75rem(12px)로 설정합니다.
+                                             * - space-y-1: 자식 요소들 사이에 0.25rem(4px) 간격을 둡니다.
+                                             * - block: 블록 요소로 표시하여 전체 너비를 차지하게 합니다.
+                                             * - leading-none: 줄 간격을 1(기본값)로 설정합니다.
+                                             * - no-underline: 밑줄을 제거합니다.
+                                             * - outline-none: 포커스 시 아웃라인을 제거합니다.
+                                             */}
+                                            <Link className="p-3 space-y-1 block leading-none no-underline outline-none" to={subMenu.to}>
+                                                {/**
+                                                 * className 설명:
+                                                 * - text-sm: 작은 크기의 텍스트로 설정합니다.
+                                                 * - font-medium: 폰트 두께를 중간으로 설정합니다.
+                                                 * - leading-none: 줄 간격을 1(기본값)로 설정합니다.
+                                                 */}
+                                                <span className="text-sm font-medium leading-none">{subMenu.name}</span>
+                                                {/**
+                                                 * className 설명:
+                                                 * - text-sm: 작은 크기의 텍스트로 설정합니다.
+                                                 * - leading-snug: 줄 간격을 약간 좁게 설정합니다.
+                                                 * - text-muted-foreground: 보조 텍스트 색상을 적용합니다.
+                                                 */}
+                                                <p className="text-sm leading-snug text-muted-foreground">
+                                                    {subMenu.description}
+                                                </p></Link>
+                                        </NavigationMenuItem>))}
+                                    </ul>
                                 </NavigationMenuContent>
                             </NavigationMenuItem>
                         ))}
