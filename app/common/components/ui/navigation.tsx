@@ -1,6 +1,7 @@
 import { Separator } from "~/common/components/ui/separator";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
+import { cn } from "~/lib/utils";
 
 
 const menus = [
@@ -156,7 +157,14 @@ export default function Navigation() {
                                          * - transition-colors: 색상 변경 시 애니메이션 효과를 적용합니다.
                                          * - hover:bg-accent/50: 마우스 오버 시 배경색을 회색으로 설정합니다.
                                          */
-                                        <NavigationMenuItem className="select-none rounded-md transition-colors hover:bg-accent/50" key={subMenu.name}>
+                                        <NavigationMenuItem 
+                                        key={subMenu.name} 
+                                        className={cn([
+                                            "select-none rounded-md transition-colors hover:bg-accent/50",
+                                            subMenu.to === "/products/promote" && "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
+                                            subMenu.to === "/jobs/submit" && "col-span-2 bg-primary/10 hover:bg-primary/20 focus:bg-primary/20",
+                                        ])}
+                                             >
                                             {/**
                                              * className 설명:
                                              * - p-3: 패딩을 0.75rem(12px)로 설정합니다.
