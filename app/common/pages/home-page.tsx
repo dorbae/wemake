@@ -20,7 +20,7 @@ export function meta(): Route.MetaFunction {
 
 export default function HomePage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center pt-16">
       <div className="text-center space-y-6">
         <h1 className="text-6xl font-bold text-gray-900 mb-4">
           WeMake

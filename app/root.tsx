@@ -9,6 +9,7 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import Navigation from "./common/components/ui/navigation";
 
 // @NOTICE: This is a React Router component that adds links to the head of the document
 export const links: Route.LinksFunction = () => [
@@ -45,7 +46,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 // @NOTICE: Oulet component will be replaced by the route one
 export default function App() {
-  return <Outlet />;
+  return <><Navigation /><Outlet /></>;
 }
 
 // @NOTICE: This is a React Router component that displays an error message when the route fails to load.

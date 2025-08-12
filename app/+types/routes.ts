@@ -1,17 +1,20 @@
 import type { MetaFunction } from "react-router";
 
-export interface Route {
-  LoaderArgs: {
+export namespace Route {
+  export interface LoaderArgs {
     request: Request;
     params: Record<string, string>;
-  };
-  ActionArgs: {
+  }
+  
+  export interface ActionArgs {
     request: Request;
     params: Record<string, string>;
-  };
-  ComponentProps: {
+  }
+  
+  export interface ComponentProps {
     loaderData: any;
     actionData?: any;
-  };
-  MetaFunction: MetaFunction;
+  }
+  
+  export type MetaFunction = import("react-router").MetaFunction;
 }
