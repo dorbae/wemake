@@ -1,5 +1,118 @@
 import { Separator } from "~/common/components/ui/separator";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
+
+
+const menus = [
+    {
+        name: "Products",
+        to: "/products",
+        items: [
+            {
+                name: "Leaderboards",
+                description: "See the top performers in your community",
+                to: "/products/leaderboards"
+            },
+            {
+                name: "Categories",
+                description: "Explore the categories of products",
+                to: "/products/categories"
+            },
+            {
+                name: "Search",
+                description: "Search for a product",
+                to: "/products/search"
+            },
+            {
+                name: "Submit a product",
+                description: "Submit a product to the community",
+                to: "/products/submit"
+            },
+            {
+                name: "Promote",
+                description: "Promote a product to the community",
+                to: "/products/promote"
+            }
+        ]
+    },
+    {
+        name: "Jobs",
+        to: "/jobs",
+        items: [
+            {
+                name: "Remote Jobs",
+                description: "Find a remote job in the community",
+                to: "/jobs?location=remote"
+            },
+            {
+                name: "Full-time Jobs",
+                description: "Find a full-time job in the community",
+                to: "/jobs?type=full-time"
+            },
+            {
+                name: "Freelance Jobs",
+                description: "Find a freelance job in the community",
+                to: "/jobs?type=freelance"
+            },
+            {
+                name: "Internships",
+                description: "Find an internship in the community",
+                to: "/jobs?type=internship"
+            },
+            {
+                name: "Submit a job",
+                description: "Submit a job to the community",
+                to: "/jobs/submit"
+            }
+        ]
+    },
+    {
+        name: "Community",
+        to: "/community",
+        items: [
+            {
+                name: "All posts",
+                description: "See all posts in the community",
+                to: "/community"
+            },
+            {
+                name: "Top posts",
+                description: "See the top posts in the community",
+                to: "/community?sort=top"
+            },
+            {
+                name: "New posts",
+                description: "See the new posts in the community",
+                to: "/community?sort=new"
+            },
+            {
+                name: "Create a post",
+                description: "Create a post in the community",
+                to: "/community/create"
+            }
+        ]
+    },
+    {
+        name: "IdeasGPT",
+        to: "/ideas"
+    },
+    {
+        name: "Teams",
+        to: "/teams",
+        items: [
+            {
+                name: "All teams",
+                description: "See all teams in the community",
+                to: "/teams"
+            },
+            {
+                name: "Create a team",
+                description: "Create a team in the community",
+                to: "/teams/create"
+            }
+        ]
+    }
+]
 
 export default function Navigation() {
     /**
@@ -20,6 +133,15 @@ export default function Navigation() {
             <div className="flex items-center">
                 <Link to="/" className="font-bold tracking-tighter">wemake</Link>
                 <Separator orientation="vertical" className="h-6 mx-4" />
+                <NavigationMenu>
+                    <NavigationMenuList>
+                        {menus.map((menu) => (
+                            <NavigationMenuItem key={menu.name}>
+                                <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
+                            </NavigationMenuItem>
+                        ))}
+                    </NavigationMenuList>
+                </NavigationMenu>
             </div>
         </nav>
     );
