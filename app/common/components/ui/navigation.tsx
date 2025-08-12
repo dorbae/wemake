@@ -1,5 +1,5 @@
 import { Separator } from "~/common/components/ui/separator";
-import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent } from "~/common/components/ui/navigation-menu";
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, navigationMenuTriggerStyle } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
 
@@ -196,7 +196,7 @@ export default function Navigation() {
                                         </NavigationMenuItem>))}
                                     </ul>
                                 </NavigationMenuContent>
-                                </> : <Link to={menu.to}>{menu.name}</Link>}
+                                </> : <Link className={navigationMenuTriggerStyle()} to={menu.to}>{menu.name}</Link>}
                             </NavigationMenuItem>
                         ))}
                     </NavigationMenuList>
