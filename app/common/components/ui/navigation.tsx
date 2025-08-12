@@ -138,6 +138,7 @@ export default function Navigation() {
                     <NavigationMenuList>
                         {menus.map((menu) => (
                             <NavigationMenuItem key={menu.name}>
+                                {menu.items ? <>
                                 <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
                                 <NavigationMenuContent>
                                     {/**
@@ -191,9 +192,11 @@ export default function Navigation() {
                                                 <p className="text-sm leading-snug text-muted-foreground">
                                                     {subMenu.description}
                                                 </p></Link>
+                                                
                                         </NavigationMenuItem>))}
                                     </ul>
                                 </NavigationMenuContent>
+                                </> : <Link to={menu.to}>{menu.name}</Link>}
                             </NavigationMenuItem>
                         ))}
                     </NavigationMenuList>
