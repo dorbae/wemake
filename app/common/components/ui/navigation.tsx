@@ -94,8 +94,7 @@ const menus = [
     },
     {
         name: "IdeasGPT",
-        to: "/ideas",
-        items: []
+        to: "/ideas"
     },
     {
         name: "Teams",
@@ -139,7 +138,7 @@ export default function Navigation() {
                         {menus.map((menu) => (
                             <NavigationMenuItem key={menu.name}>
                                 <NavigationMenuTrigger>{menu.name}</NavigationMenuTrigger>
-                                <NavigationMenuContent>{menu.items.map((subMenu) => (
+                                <NavigationMenuContent>{menu.items?.map((subMenu) => (
                                     <NavigationMenuItem key={subMenu.name}>
                                         <Link to={subMenu.to}>{subMenu.name}</Link>
                                     </NavigationMenuItem>))}
