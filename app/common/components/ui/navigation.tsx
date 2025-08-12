@@ -149,7 +149,14 @@ export default function Navigation() {
                                     * - grid-cols-2: 2열 그리드로 배치합니다.
                                     */}
                                     <ul className="grid w-[500px] font-light gap-3 p-4 grid-cols-2">{menu.items?.map((subMenu) => (
-                                        <NavigationMenuItem key={subMenu.name}>
+                                        /**
+                                         * className 설명:
+                                         * - select-none: 텍스트 선택을 비활성화합니다.
+                                         * - rounded-md: 모서리를 둥글게 설정합니다.
+                                         * - transition-colors: 색상 변경 시 애니메이션 효과를 적용합니다.
+                                         * - hover:bg-accent/50: 마우스 오버 시 배경색을 회색으로 설정합니다.
+                                         */
+                                        <NavigationMenuItem className="select-none rounded-md transition-colors hover:bg-accent/50" key={subMenu.name}>
                                             {/**
                                              * className 설명:
                                              * - p-3: 패딩을 0.75rem(12px)로 설정합니다.
