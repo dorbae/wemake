@@ -3,8 +3,9 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuT
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
 import { Button } from "./button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
+import { BarChart3Icon, LogOutIcon } from "lucide-react";
 
 let isLoggedIn = true;
 
@@ -222,11 +223,33 @@ export default function Navigation() {
                         <span className="text-xs text-muted-foreground">dorbae.io@gmail.com</span>
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel>Profile</DropdownMenuLabel>
+                    <DropdownMenuGroup>
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                            <Link to="/my/dashboard" className="flex items-center">
+                                <BarChart3Icon className="size-4 mr-2" />
+                                Dashboard
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                            <Link to="/my/profile" className="flex items-center">
+                                <BarChart3Icon className="size-4 mr-2" />
+                                Profile
+                            </Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                            <Link to="/my/settings" className="flex items-center">
+                                <BarChart3Icon className="size-4 mr-2" />
+                                Settings
+                            </Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuGroup>
                     <DropdownMenuSeparator />
-                    <DropdownMenuLabel>Settings</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuLabel>Logout</DropdownMenuLabel>
+                    <DropdownMenuItem asChild className="cursor-pointer">
+                        <Link to="/auth/logout" className="flex items-center">
+                            <LogOutIcon className="size-4 mr-2" />
+                            Logout
+                        </Link>
+                    </DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>) : (
                 <div className="flex items-center gap-4">
