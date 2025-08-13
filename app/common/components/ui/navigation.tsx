@@ -3,7 +3,8 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuT
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
 import { Button } from "./button";
-import { DropdownMenu } from "./dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
 
 let isLoggedIn = false;
 
@@ -207,7 +208,20 @@ export default function Navigation() {
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
-por            {isLoggedIn ? null : (
+            {isLoggedIn ? (<DropdownMenu>
+                <DropdownMenuTrigger>                    
+                <Avatar>
+                    <AvatarImage src="https://github.com/dorbae.png" />
+                    {/** Replcaed text when failed to load image */}
+                    <AvatarFallback>Me</AvatarFallback>
+                </Avatar>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                    <DropdownMenuItem>Profile</DropdownMenuItem>
+                    <DropdownMenuItem>Settings</DropdownMenuItem>
+                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                </DropdownMenuContent>
+            </DropdownMenu>) : (
                 <div className="flex items-center gap-4">
                     <Button asChild variant="secondary">
                         <Link to="/auth/login">Login</Link>
