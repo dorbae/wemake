@@ -46,7 +46,14 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 // @NOTICE: Oulet component will be replaced by the route one
 export default function App() {
-  return <><Navigation isLoggedIn={true} hasNotifications={true} hasMessages={true} /><Outlet /></>;
+  return (<div className="py-28">
+    <Navigation
+      isLoggedIn={true}
+      hasNotifications={true}
+      hasMessages={true}
+    />
+    <Outlet />
+  </div>);
 }
 
 // @NOTICE: This is a React Router component that displays an error message when the route fails to load.
