@@ -118,7 +118,7 @@ const menus = [
     }
 ]
 
-export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
+export default function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLoggedIn: boolean, hasNotifications: boolean, hasMessages: boolean }) {
     /**
      * className 설명:
      * - flex: flexbox 레이아웃을 적용하여 자식 요소들을 가로로 정렬합니다.
@@ -208,14 +208,16 @@ export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
                 </NavigationMenu>
             </div>
             {isLoggedIn ? (<div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" asChild className="relative">
                     <Link to="/my/notifications">
                         <BellIcon className="size-4" />
+                        {hasNotifications && (<div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-2"/>)}
                     </Link>
                 </Button>
-                <Button variant="ghost" size="icon" asChild>
+                <Button variant="ghost" size="icon" asChild className="relative">
                     <Link to="/my/messages">
                         <MessageCircleIcon className="size-4" />
+                        {hasMessages && (<div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-2"/>)}
                     </Link> 
                 </Button>
                 <DropdownMenu>
