@@ -7,8 +7,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
 import { BarChart3Icon, BellIcon, LogOutIcon, MessageCircleIcon } from "lucide-react";
 
-let isLoggedIn = true;
-
 const menus = [
     {
         name: "Products",
@@ -120,7 +118,7 @@ const menus = [
     }
 ]
 
-export default function Navigation() {
+export default function Navigation({ isLoggedIn }: { isLoggedIn: boolean }) {
     /**
      * className 설명:
      * - flex: flexbox 레이아웃을 적용하여 자식 요소들을 가로로 정렬합니다.
