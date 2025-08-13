@@ -5,7 +5,7 @@ import { cn } from "~/lib/utils";
 import { Button } from "./button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
-import { BarChart3Icon, LogOutIcon } from "lucide-react";
+import { BarChart3Icon, BellIcon, LogOutIcon, MessageCircleIcon } from "lucide-react";
 
 let isLoggedIn = true;
 
@@ -209,49 +209,60 @@ export default function Navigation() {
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
-            {isLoggedIn ? (<DropdownMenu>
-                <DropdownMenuTrigger>
-                    <Avatar>
-                        <AvatarImage src="https://github.com/dorbae.png" />
-                        {/** Replcaed text when failed to load image */}
-                        <AvatarFallback>Me</AvatarFallback>
-                    </Avatar>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                    <DropdownMenuLabel className="flex flex-col gap-1">
-                        <span className="font-medium">Dorbae</span>
-                        <span className="text-xs text-muted-foreground">dorbae.io@gmail.com</span>
-                    </DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
+            {isLoggedIn ? (<div className="flex items-center gap-2">
+                <Button variant="ghost" size="icon" asChild>
+                    <Link to="/my/notifications">
+                        <BellIcon className="size-4" />
+                    </Link>
+                </Button>
+                <Button variant="ghost" size="icon" asChild>
+                    <Link to="/my/messages">
+                        <MessageCircleIcon className="size-4" />
+                    </Link> 
+                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <Avatar>
+                            <AvatarImage src="https://github.com/dorbae.png" />
+                            {/** Replcaed text when failed to load image */}
+                            <AvatarFallback>Me</AvatarFallback>
+                        </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                        <DropdownMenuLabel className="flex flex-col gap-1">
+                            <span className="font-medium">Dorbae</span>
+                            <span className="text-xs text-muted-foreground">dorbae.io@gmail.com</span>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/dashboard" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Dashboard
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/profile" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Profile
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/settings" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Settings
+                                </Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem asChild className="cursor-pointer">
-                            <Link to="/my/dashboard" className="flex items-center">
-                                <BarChart3Icon className="size-4 mr-2" />
-                                Dashboard
+                            <Link to="/auth/logout" className="flex items-center">
+                                <LogOutIcon className="size-4 mr-2" />
+                                Logout
                             </Link>
                         </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                            <Link to="/my/profile" className="flex items-center">
-                                <BarChart3Icon className="size-4 mr-2" />
-                                Profile
-                            </Link>
-                        </DropdownMenuItem>
-                        <DropdownMenuItem asChild className="cursor-pointer">
-                            <Link to="/my/settings" className="flex items-center">
-                                <BarChart3Icon className="size-4 mr-2" />
-                                Settings
-                            </Link>
-                        </DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem asChild className="cursor-pointer">
-                        <Link to="/auth/logout" className="flex items-center">
-                            <LogOutIcon className="size-4 mr-2" />
-                            Logout
-                        </Link>
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>) : (
+                    </DropdownMenuContent>
+                </DropdownMenu></div>) : (
                 <div className="flex items-center gap-4">
                     <Button asChild variant="secondary">
                         <Link to="/auth/login">Login</Link>
