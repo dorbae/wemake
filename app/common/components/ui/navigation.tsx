@@ -2,7 +2,10 @@ import { Separator } from "~/common/components/ui/separator";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, navigationMenuTriggerStyle } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
-
+import { Button } from "./button";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
+import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
+import { BarChart3Icon, BellIcon, LogOutIcon, MessageCircleIcon } from "lucide-react";
 
 const menus = [
     {
@@ -115,7 +118,7 @@ const menus = [
     }
 ]
 
-export default function Navigation() {
+export default function Navigation({ isLoggedIn, hasNotifications, hasMessages }: { isLoggedIn: boolean, hasNotifications: boolean, hasMessages: boolean }) {
     /**
      * className 설명:
      * - flex: flexbox 레이아웃을 적용하여 자식 요소들을 가로로 정렬합니다.
@@ -204,6 +207,72 @@ export default function Navigation() {
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
+            {isLoggedIn ? (<div className="flex items-center gap-2">
+                <Button variant="ghost" size="icon" asChild className="relative">
+                    <Link to="/my/notifications">
+                        <BellIcon className="size-4" />
+                        {hasNotifications && (<div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-2"/>)}
+                    </Link>
+                </Button>
+                <Button variant="ghost" size="icon" asChild className="relative">
+                    <Link to="/my/messages">
+                        <MessageCircleIcon className="size-4" />
+                        {hasMessages && (<div className="absolute -top-1 -right-1 bg-red-500 text-white rounded-full size-2"/>)}
+                    </Link> 
+                </Button>
+                <DropdownMenu>
+                    <DropdownMenuTrigger>
+                        <Avatar>
+                            <AvatarImage src="https://github.com/dorbae.png" />
+                            {/** Replcaed text when failed to load image */}
+                            <AvatarFallback>Me</AvatarFallback>
+                        </Avatar>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-56">
+                        <DropdownMenuLabel className="flex flex-col gap-1">
+                            <span className="font-medium">Dorbae</span>
+                            <span className="text-xs text-muted-foreground">dorbae.io@gmail.com</span>
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuGroup>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/dashboard" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Dashboard
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/profile" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Profile
+                                </Link>
+                            </DropdownMenuItem>
+                            <DropdownMenuItem asChild className="cursor-pointer">
+                                <Link to="/my/settings" className="flex items-center">
+                                    <BarChart3Icon className="size-4 mr-2" />
+                                    Settings
+                                </Link>
+                            </DropdownMenuItem>
+                        </DropdownMenuGroup>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem asChild className="cursor-pointer">
+                            <Link to="/auth/logout" className="flex items-center">
+                                <LogOutIcon className="size-4 mr-2" />
+                                Logout
+                            </Link>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu></div>) : (
+                <div className="flex items-center gap-4">
+                    <Button asChild variant="secondary">
+                        <Link to="/auth/login">Login</Link>
+                    </Button>
+                    <Button asChild>
+                        <Link to="/auth/join">Join</Link>
+                    </Button>
+                </div>
+            )
+            }
         </nav>
     );
 }
