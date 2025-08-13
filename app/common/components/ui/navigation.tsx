@@ -3,10 +3,10 @@ import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuT
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
 import { Button } from "./button";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "./dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "./dropdown-menu";
 import { Avatar, AvatarImage, AvatarFallback } from "./avatar";
 
-let isLoggedIn = false;
+let isLoggedIn = true;
 
 const menus = [
     {
@@ -209,17 +209,24 @@ export default function Navigation() {
                 </NavigationMenu>
             </div>
             {isLoggedIn ? (<DropdownMenu>
-                <DropdownMenuTrigger>                    
-                <Avatar>
-                    <AvatarImage src="https://github.com/dorbae.png" />
-                    {/** Replcaed text when failed to load image */}
-                    <AvatarFallback>Me</AvatarFallback>
-                </Avatar>
+                <DropdownMenuTrigger>
+                    <Avatar>
+                        <AvatarImage src="https://github.com/dorbae.png" />
+                        {/** Replcaed text when failed to load image */}
+                        <AvatarFallback>Me</AvatarFallback>
+                    </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
-                    <DropdownMenuItem>Profile</DropdownMenuItem>
-                    <DropdownMenuItem>Settings</DropdownMenuItem>
-                    <DropdownMenuItem>Logout</DropdownMenuItem>
+                    <DropdownMenuLabel className="flex flex-col gap-1">
+                        <span className="font-medium">Dorbae</span>
+                        <span className="text-xs text-muted-foreground">dorbae.io@gmail.com</span>
+                    </DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel>Profile</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel>Settings</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuLabel>Logout</DropdownMenuLabel>
                 </DropdownMenuContent>
             </DropdownMenu>) : (
                 <div className="flex items-center gap-4">
