@@ -2,7 +2,10 @@ import { Separator } from "~/common/components/ui/separator";
 import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, navigationMenuTriggerStyle } from "~/common/components/ui/navigation-menu";
 import { Link } from "react-router";
 import { cn } from "~/lib/utils";
+import { Button } from "./button";
+import { DropdownMenu } from "./dropdown-menu";
 
+let isLoggedIn = false;
 
 const menus = [
     {
@@ -204,6 +207,17 @@ export default function Navigation() {
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
+por            {isLoggedIn ? null : (
+                <div className="flex items-center gap-4">
+                    <Button asChild variant="secondary">
+                        <Link to="/auth/login">Login</Link>
+                    </Button>
+                    <Button asChild>
+                        <Link to="/auth/join">Join</Link>
+                    </Button>
+                </div>
+            )
+            }
         </nav>
     );
 }
