@@ -70,8 +70,10 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
           </Button>
         </div>
         <Card className="bg-transparent hover:bg-card/50 transition-colors">
-          <CardHeader className="text-xl">
-            <CardTitle>A startup that creates an AI-powered generated personal trainer, delivering customized fitnewss recommendations and tracking of progress using a mobile app and a web app.</CardTitle>
+          <CardHeader>
+            <Link to="/ideas/ideaId">
+              <CardTitle className="text-xl">A startup that creates an AI-powered generated personal trainer, delivering customized fitnewss recommendations and tracking of progress using a mobile app and a web app.</CardTitle>
+            </Link>
           </CardHeader>
           <CardContent>
             <span className="flex items-center gap-1 text-small">
