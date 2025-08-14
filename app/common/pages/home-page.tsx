@@ -50,11 +50,8 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
         <PostCard
           postId="postId"
           title="Discussion Title"
-          author={{
-            name: "dorbae",
-            avatar: "https://github.com/dorbae.png",
-            initials: "N",
-          }}
+          author="dorbae"
+          authorAvatarUrl="https://github.com/dorbae.png"
           category="Productivity"
           postAt="12 hours ago"
         />

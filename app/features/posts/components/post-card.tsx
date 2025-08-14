@@ -6,11 +6,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "~/common/components/ui/avat
 interface PostCardProps {
   postId: string;
   title: string;
-  author: {
-    name: string;
-    avatar?: string;
-    initials: string;
-  };
+  author: string;
+  authorAvatarUrl: string;
   category: string;
   postAt: string;
 }
@@ -19,6 +16,7 @@ export function PostCard({
   postId,
   title,
   author,
+  authorAvatarUrl,
   category,
   postAt
 }: PostCardProps) {
@@ -27,15 +25,15 @@ export function PostCard({
       <Card className="bg-transparent hover:bg-card/50 transition-colors">
         <CardHeader className="flex flex-row items-center gap-2">
           <Avatar className="size-14">
-            <AvatarFallback>{author.initials}</AvatarFallback>
-            {author.avatar && <AvatarImage src={author.avatar} />}
+            <AvatarFallback>N</AvatarFallback>
+            {authorAvatarUrl && <AvatarImage src={authorAvatarUrl} />}
           </Avatar>
           <div className="space-y-2">
             <CardTitle className="text-2xl font-semibold leading-none tracking-tight">
               {title}
             </CardTitle>
             <div className="flex items-center gap-2 text-xs leading-tight text-muted-foreground">
-              <span>{author.name}</span>
+              <span>{author}</span>
               <span>•</span>
               <span>{category}</span>
               <span>•</span>
