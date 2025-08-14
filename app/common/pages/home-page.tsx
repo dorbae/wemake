@@ -46,7 +46,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
           <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest discussions</h2>
           <p className="text-xl font-light text-foreground">The latest discussions made by our comunity today.</p>
           <Button variant="link" className="p-0" asChild>
-            <Link to="/products/leaderboards">Explore all discussions &rarr;</Link>
+            <Link to="/community">Explore all discussions &rarr;</Link>
           </Button>
         </div>
         {Array.from({ length: 5 }).map((_, index) => (
