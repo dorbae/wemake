@@ -77,6 +77,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             viewsCount={123 + index * 10}
             timeAgo={`${12 + index} hours ago`}
             likesCount={12 + index * 2}
+            claimed={index % 2 === 0}
           />
         ))}
       </div>
