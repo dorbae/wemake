@@ -39,7 +39,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
           />
         ))}
       </div>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest discussions</h2>
           <p className="text-xl font-light text-foreground">The latest discussions made by our comunity today.</p>
@@ -47,15 +47,18 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             <Link to="/products/leaderboards">Explore all discussions &rarr;</Link>
           </Button>
         </div>
-        <PostCard
-          postId="postId"
+        {Array.from({ length: 5 }).map((_, index) => (
+          <PostCard
+            key={index}
+            postId="postId"
           title="Discussion Title"
           author="dorbae"
           authorAvatarUrl="https://github.com/dorbae.png"
-          category="Productivity"
-          postAt="12 hours ago"
-        />
-      </div>
+            category="Productivity"
+            postAt="12 hours ago"
+          />
+        ))}
+      </div>  
     </div>
   );
 }

@@ -34,7 +34,6 @@ export function PostCard({
             </CardTitle>
             <div className="flex items-center gap-2 text-xs leading-tight text-muted-foreground">
               <span>{author}</span>
-              <span>•</span>
               <span>{category}</span>
               <span>•</span>
               <span>{postAt}</span>
