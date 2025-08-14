@@ -2,10 +2,10 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { DotIcon, EyeIcon, HeartIcon } from "lucide-react";
+import { IdeaCard } from "~/features/ideas/components/idea-card";
 
 export function loader({ request }: Route.LoaderArgs) {
   return {};
@@ -46,7 +46,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
           <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest discussions</h2>
           <p className="text-xl font-light text-foreground">The latest discussions made by our comunity today.</p>
           <Button variant="link" className="p-0" asChild>
-            <Link to="/community">Explore all discussions &rarr;</Link>
+            <Link to="/products/leaderboards">Explore all discussions &rarr;</Link>
           </Button>
         </div>
         {Array.from({ length: 5 }).map((_, index) => (
@@ -63,37 +63,22 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
       </div>
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <h2 className="text-5xl font-bold leading-tight tracking-tight">IdeasGPT</h2>
-          <p className="text-xl font-light text-foreground">Find ideas for your next project.</p>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest ideas</h2>
+          <p className="text-xl font-light text-foreground">The latest ideas shared by our community today.</p>
           <Button variant="link" className="p-0" asChild>
             <Link to="/ideas">Explore all ideas &rarr;</Link>
           </Button>
         </div>
-        <Card className="bg-transparent hover:bg-card/50 transition-colors">
-          <CardHeader>
-            <Link to="/ideas/ideaId">
-              <CardTitle className="text-xl">A startup that creates an AI-powered generated personal trainer, delivering customized fitnewss recommendations and tracking of progress using a mobile app and a web app.</CardTitle>
-            </Link>
-          </CardHeader>
-          <CardContent>
-            <span className="flex items-center gap-1 text-small">
-              <EyeIcon className="w-4 h-4" />
-              <span>123</span>
-            </span>
-            <DotIcon className="w-4 h-4" />
-            <span>12 hours ago</span>
-          </CardContent>
-          <CardFooter className="flex justify-end gap-2">
-            <Button variant="outline" className="p-0" >
-              <HeartIcon className="w-4 h-4" />
-              <span>12</span>
-            </Button>
-            <Button className="p-0" asChild>
-              <Link to="/ideas/ideaId/claim">Claim idea now &rarr;</Link>
-            </Button>
-          </CardFooter>
-        </Card>
-
+        {Array.from({ length: 5 }).map((_, index) => (
+          <IdeaCard
+            key={index}
+            ideaId={`idea-${index}`}
+            title={`AI-powered ${index + 1} idea that revolutionizes the industry with innovative solutions and cutting-edge technology.`}
+            viewsCount={123 + index * 10}
+            timeAgo={`${12 + index} hours ago`}
+            likesCount={12 + index * 2}
+          />
+        ))}
       </div>
     </div>
   );
