@@ -2,8 +2,10 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
+import { IdeaCard } from "~/features/ideas/components/idea-card";
 
 export function loader({ request }: Route.LoaderArgs) {
   return {};
@@ -51,14 +53,34 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
           <PostCard
             key={index}
             postId="postId"
-          title="Discussion Title"
-          author="dorbae"
-          authorAvatarUrl="https://github.com/dorbae.png"
+            title="Discussion Title"
+            author="dorbae"
+            authorAvatarUrl="https://github.com/dorbae.png"
             category="Productivity"
             postAt="12 hours ago"
           />
         ))}
-      </div>  
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest ideas</h2>
+          <p className="text-xl font-light text-foreground">The latest ideas shared by our community today.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/ideas">Explore all ideas &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <IdeaCard
+            key={index}
+            ideaId={`idea-${index}`}
+            title={`AI-powered ${index + 1} idea that revolutionizes the industry with innovative solutions and cutting-edge technology.`}
+            viewsCount={123 + index * 10}
+            timeAgo={`${12 + index} hours ago`}
+            likesCount={12 + index * 2}
+            claimed={index % 2 === 0}
+          />
+        ))}
+      </div>
     </div>
   );
 }
