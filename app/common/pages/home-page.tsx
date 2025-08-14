@@ -1,28 +1,20 @@
 import type { Route } from "../../+types/routes";
+import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { ChevronUpIcon, EyeIcon, MessageCircleIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
-import ProductCard from "~/features/products/components/product-card";
-import { Avatar, AvatarFallback, AvatarImage } from "../components/ui/avatar";
+import { PostCard } from "~/features/posts/components/post-card";
+import { ProductCard } from "~/features/products/components/product-card";
 
 export function loader({ request }: Route.LoaderArgs) {
-  return {
-    message: "Welcome to WeMake!"
-  };
-}
-
-export function action({ request }: Route.ActionArgs) {
-  // Form submission handling can be added here
   return {};
 }
 
-export function meta(): Route.MetaFunction {
+export const meta: MetaFunction = () => {
   return [
-    { title: "WeMake - Home" },
-    { name: "description", content: "Welcome to WeMake platform" }
+    { title: "Wemake - Home" },
+    { name: "description", content: "Welcome to Wemake - Discover amazing products and connect with our community" }
   ];
-}
+};
 
 export default function HomePage({ loaderData }: Route.ComponentProps) {
   return (
@@ -43,6 +35,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             description={`This is the ${index + 1}th product description`}
             commentsCount={12}
             viewsCount={156}
+            votesCount={12}
           />
         ))}
       </div>
@@ -54,29 +47,17 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             <Link to="/products/leaderboards">Explore all discussions &rarr;</Link>
           </Button>
         </div>
-        <Card className="bg-transparent hover:bg-card/50 transition-colors">
-          <CardHeader className="flex flex-row items-center gap-2">
-            <Avatar className="size-14">
-              <AvatarFallback>N</AvatarFallback>
-              <AvatarImage src="https://github.com/apple.png" />
-            </Avatar>
-            <div className="space-y-2">
-              <CardTitle className="text-2xl font-semibold leading-none tracking-tight">Discussion Title</CardTitle>
-              <div className="flex items-center gap-2 text-xs leading-tight text-muted-foreground">
-                <span>Nico</span>
-                <span>•</span>
-                <span>Productivity</span>
-                <span>•</span>
-                <span>12 hours ago</span>
-              </div>
-            </div>
-          </CardHeader>
-          <CardFooter className="flex justify-end">
-            <Button variant="link" asChild>
-              <Link to="/community/postId">Reply &rarr;</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+        <PostCard
+          postId="postId"
+          title="Discussion Title"
+          author={{
+            name: "dorbae",
+            avatar: "https://github.com/dorbae.png",
+            initials: "N",
+          }}
+          category="Productivity"
+          postAt="12 hours ago"
+        />
       </div>
     </div>
   );
