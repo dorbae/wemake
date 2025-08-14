@@ -1,37 +1,33 @@
 import type { Route } from "../../+types/routes";
+import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
-import { ChevronUpIcon, EyeIcon, MessageCircleIcon } from "lucide-react";
 import { Button } from "../components/ui/button";
-import ProductCard from "~/features/products/components/product-card";
+import { PostCard } from "~/features/posts/components/post-card";
+import { ProductCard } from "~/features/products/components/product-card";
 
 export function loader({ request }: Route.LoaderArgs) {
-  return {
-    message: "Welcome to WeMake!"
-  };
-}
-
-export function action({ request }: Route.ActionArgs) {
-  // Form submission handling can be added here
   return {};
 }
 
-export function meta(): Route.MetaFunction {
+export const meta: MetaFunction = () => {
   return [
-    { title: "WeMake - Home" },
-    { name: "description", content: "Welcome to WeMake platform" }
+    { title: "Wemake - Home" },
+    { name: "description", content: "Welcome to Wemake - Discover amazing products and connect with our community" }
   ];
-}
+};
 
 export default function HomePage({ loaderData }: Route.ComponentProps) {
   return (
-    <div className="px-20">
+    <div className="px-20 space-y-40">
       <div className="grid grid-cols-3 gap-4">
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products</h2>
           <p className="text-xl font-light text-foreground">The best products made by our comunity today.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/products/leaderboards">Explore all products &rarr;</Link>
+          </Button>
         </div>
-        {Array.from({ length: 10 }).map((_, index) => (
+        {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
             key={index}
             id={`product-${index}`}
@@ -39,9 +35,30 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             description={`This is the ${index + 1}th product description`}
             commentsCount={12}
             viewsCount={156}
+            votesCount={12}
           />
         ))}
       </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Latest discussions</h2>
+          <p className="text-xl font-light text-foreground">The latest discussions made by our comunity today.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/products/leaderboards">Explore all discussions &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 5 }).map((_, index) => (
+          <PostCard
+            key={index}
+            postId="postId"
+          title="Discussion Title"
+          author="dorbae"
+          authorAvatarUrl="https://github.com/dorbae.png"
+            category="Productivity"
+            postAt="12 hours ago"
+          />
+        ))}
+      </div>  
     </div>
   );
 }

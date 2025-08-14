@@ -9,7 +9,7 @@ interface ProductCardProps {
   votesCount: number;
 }
 
-export default function ProductCard({ id, name, description, commentsCount, viewsCount, votesCount }: ProductCardProps) {
+export function ProductCard({ id, name, description, commentsCount, viewsCount, votesCount }: ProductCardProps) {
   return (
     <div className="bg-white rounded-lg shadow p-4 hover:shadow-lg transition-shadow">
       <h3 className="font-semibold text-lg mb-2">{name}</h3>
