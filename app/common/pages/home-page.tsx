@@ -30,6 +30,9 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
         <div>
           <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products</h2>
           <p className="text-xl font-light text-foreground">The best products made by our comunity today.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/products/leaderboards">Explore all products &rarr;</Link>
+          </Button>
         </div>
         {Array.from({ length: 10 }).map((_, index) => (
           <ProductCard
