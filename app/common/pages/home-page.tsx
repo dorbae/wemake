@@ -2,12 +2,14 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
 import { Badge } from "../components/ui/badge";
+import { Avatar } from "@radix-ui/react-avatar";
+import { AvatarFallback, AvatarImage } from "../components/ui/avatar";
 
 export function loader({ request }: Route.LoaderArgs) {
   return {};
@@ -100,13 +102,46 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             companyLogoUrl="https://github.com/google.png"
             postedAt={`${12 + index * 2} hours ago`}
             type="Full-time"
-            companyHq={index === 0 ? "San Francisco, CA" : 
-                     index === 1 ? "Cupertino, CA" : 
-                     "Mountain View, CA"}
+            companyHq={index === 0 ? "San Francisco, CA" :
+              index === 1 ? "Cupertino, CA" :
+                "Mountain View, CA"}
             salary="$100,000 - $120,000"
             positionLocation={index % 2 === 0 ? "Remote" : "On-site"}
           />
         ))}
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Find a team mate</h2>
+          <p className="text-xl font-light text-foreground">Joint a team looking for a new member.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/teams">Explore all teams &rarr;</Link>
+          </Button>
+        </div>
+        <Link to="/teams/teamId">
+          <Card className="bg-transparent hover:bg-card/50 transition-colors">
+            <CardHeader className="flex flex-row items-center">
+              <CardTitle className="text-base leading-loose">
+                <Badge variant="secondary" className="inline-flex items-center">
+                  <span>@dorbae</span>
+                  <Avatar className="size-5">
+                    <AvatarImage src="https://github.com/dorbae.png" />
+                    <AvatarFallback>N</AvatarFallback>
+                  </Avatar>
+                </Badge>
+                <span> is looking for</span>
+                <Badge className="text-base">React Developer</Badge>
+                <Badge className="text-base">Backend Developer</Badge>
+                <Badge className="text-base">Product Manager</Badge>
+                <span> to build</span>
+                <span> a new social media platform</span>
+              </CardTitle>
+            </CardHeader>
+            <CardFooter className="flex justify-end">
+              <Button variant="link">Join team &rarr;</Button>
+            </CardFooter>
+          </Card>
+        </Link>
       </div>
     </div>
   );
