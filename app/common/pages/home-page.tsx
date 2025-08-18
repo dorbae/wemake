@@ -2,11 +2,12 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
+import { TeamCard } from "~/features/teams/components/team-card";
 import { Badge } from "../components/ui/badge";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "../components/ui/avatar";
@@ -118,30 +119,22 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             <Link to="/teams">Explore all teams &rarr;</Link>
           </Button>
         </div>
-        <Link to="/teams/teamId">
-          <Card className="bg-transparent hover:bg-card/50 transition-colors">
-            <CardHeader className="flex flex-row items-center">
-              <CardTitle className="text-base leading-loose">
-                <Badge variant="secondary" className="inline-flex items-center">
-                  <span>@dorbae</span>
-                  <Avatar className="size-5">
-                    <AvatarImage src="https://github.com/dorbae.png" />
-                    <AvatarFallback>N</AvatarFallback>
-                  </Avatar>
-                </Badge>
-                <span> is looking for</span>
-                <Badge className="text-base">React Developer</Badge>
-                <Badge className="text-base">Backend Developer</Badge>
-                <Badge className="text-base">Product Manager</Badge>
-                <span> to build</span>
-                <span> a new social media platform</span>
-              </CardTitle>
-            </CardHeader>
-            <CardFooter className="flex justify-end">
-              <Button variant="link">Join team &rarr;</Button>
-            </CardFooter>
-          </Card>
-        </Link>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <TeamCard
+            key={index}
+            teamId={`team-${index}`}
+            leaderUsername="dorbae"
+            leaderAvatarUrl="https://github.com/dorbae.png"
+            positions={index === 0 
+              ? ["React Developer", "Backend Developer", "Product Manager"]
+              : ["UI/UX Designer", "DevOps Engineer"]
+            }
+            projectDescription={index === 0 
+              ? "a new social media platform"
+              : "an AI-powered productivity app"
+            }
+          />
+        ))}
       </div>
     </div>
   );
