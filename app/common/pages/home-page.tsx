@@ -2,10 +2,11 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
+import { Badge } from "../components/ui/badge";
 
 export function loader({ request }: Route.LoaderArgs) {
   return {};
@@ -80,6 +81,42 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             claimed={index % 2 === 0}
           />
         ))}
+      </div>
+      <div className="grid grid-cols-3 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Jobs</h2>
+          <p className="text-xl font-light text-foreground">Find your dream job.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/jobs">Explore all jobs &rarr;</Link>
+          </Button>
+        </div>
+        <Link to="/jobs/jobId">
+          <Card className="bg-transparent transition-colors hover:bg-card/50">
+            <CardHeader>
+              <div className="flex items-center gap-4 mb-8">
+                <img src="https://github.com/teslamotors.png" alt="Company Logo" className="size-10 rounded-full" />
+                <div className="space-x-2">
+                  <p className="text-accent-foreground">Tesla</p>
+                  <p className="text-xs text-muted-foreground">12 hours ago`</p>
+                </div>
+              </div>
+              <CardTitle>Software Engineer</CardTitle>
+              <CardContent>
+                <Badge variant="outline" className="text-xs">Full-time</Badge>
+                <Badge variant="outline" className="text-xs">Remote</Badge>
+              </CardContent>
+              <CardFooter className="flex justify-between">
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium text-muted-foreground">$100,000 - $120,000</span>
+                  <span className="text-sm font-medium text-muted-foreground">San Francisco, CA</span>
+                </div>
+                <Button variant="secondary" size="sm">
+                  Apply now
+                </Button>
+              </CardFooter>
+            </CardHeader>
+          </Card>
+        </Link>
       </div>
     </div>
   );
