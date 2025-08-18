@@ -7,7 +7,10 @@ import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
 import { JobCard } from "~/features/jobs/components/job-card";
+import { TeamCard } from "~/features/teams/components/team-card";
 import { Badge } from "../components/ui/badge";
+import { Avatar } from "@radix-ui/react-avatar";
+import { AvatarFallback, AvatarImage } from "../components/ui/avatar";
 
 export function loader({ request }: Route.LoaderArgs) {
   return {};
@@ -100,11 +103,36 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             companyLogoUrl="https://github.com/google.png"
             postedAt={`${12 + index * 2} hours ago`}
             type="Full-time"
-            companyHq={index === 0 ? "San Francisco, CA" : 
-                     index === 1 ? "Cupertino, CA" : 
-                     "Mountain View, CA"}
+            companyHq={index === 0 ? "San Francisco, CA" :
+              index === 1 ? "Cupertino, CA" :
+                "Mountain View, CA"}
             salary="$100,000 - $120,000"
             positionLocation={index % 2 === 0 ? "Remote" : "On-site"}
+          />
+        ))}
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        <div>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Find a team mate</h2>
+          <p className="text-xl font-light text-foreground">Joint a team looking for a new member.</p>
+          <Button variant="link" className="p-0" asChild>
+            <Link to="/teams">Explore all teams &rarr;</Link>
+          </Button>
+        </div>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <TeamCard
+            key={index}
+            teamId={`team-${index}`}
+            leaderUsername="dorbae"
+            leaderAvatarUrl="https://github.com/dorbae.png"
+            positions={index === 0 
+              ? ["React Developer", "Backend Developer", "Product Manager"]
+              : ["UI/UX Designer", "DevOps Engineer"]
+            }
+            projectDescription={index === 0 
+              ? "a new social media platform"
+              : "an AI-powered productivity app"
+            }
           />
         ))}
       </div>
