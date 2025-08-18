@@ -2,10 +2,11 @@ import type { Route } from "../../+types/routes";
 import type { MetaFunction } from "react-router";
 import { Link } from "react-router";
 import { Button } from "../components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
 import { PostCard } from "~/features/posts/components/post-card";
 import { ProductCard } from "~/features/products/components/product-card";
 import { IdeaCard } from "~/features/ideas/components/idea-card";
+import { JobCard } from "~/features/jobs/components/job-card";
 import { Badge } from "../components/ui/badge";
 
 export function loader({ request }: Route.LoaderArgs) {
@@ -90,33 +91,22 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             <Link to="/jobs">Explore all jobs &rarr;</Link>
           </Button>
         </div>
-        <Link to="/jobs/jobId">
-          <Card className="bg-transparent transition-colors hover:bg-card/50">
-            <CardHeader>
-              <div className="flex items-center gap-4 mb-8">
-                <img src="https://github.com/teslamotors.png" alt="Company Logo" className="size-10 rounded-full" />
-                <div className="space-x-2">
-                  <p className="text-accent-foreground">Tesla</p>
-                  <p className="text-xs text-muted-foreground">12 hours ago`</p>
-                </div>
-              </div>
-              <CardTitle>Software Engineer</CardTitle>
-              <CardContent>
-                <Badge variant="outline" className="text-xs">Full-time</Badge>
-                <Badge variant="outline" className="text-xs">Remote</Badge>
-              </CardContent>
-              <CardFooter className="flex justify-between">
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium text-muted-foreground">$100,000 - $120,000</span>
-                  <span className="text-sm font-medium text-muted-foreground">San Francisco, CA</span>
-                </div>
-                <Button variant="secondary" size="sm">
-                  Apply now
-                </Button>
-              </CardFooter>
-            </CardHeader>
-          </Card>
-        </Link>
+        {Array.from({ length: 3 }).map((_, index) => (
+          <JobCard
+            key={index}
+            jobId={`job-${index}`}
+            title={`Software Engineer ${index + 1}`}
+            company="Google"
+            companyLogoUrl="https://github.com/google.png"
+            postedAt={`${12 + index * 2} hours ago`}
+            type="Full-time"
+            companyHq={index === 0 ? "San Francisco, CA" : 
+                     index === 1 ? "Cupertino, CA" : 
+                     "Mountain View, CA"}
+            salary="$100,000 - $120,000"
+            positionLocation={index % 2 === 0 ? "Remote" : "On-site"}
+          />
+        ))}
       </div>
     </div>
   );
