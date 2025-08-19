@@ -8,10 +8,20 @@ export function loader({ request }: Route.LoaderArgs) {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Product Leaderboard - Wemake" },
-    { name: "description", content: "Top products ranked by community votes and engagement" }
+    { title: "Leaderboard - Wemake" },
+    { name: "description", content: "Top products leaderboard" }
   ];
 };
 
 export default function LeaderboardPage({ loaderData }: Route.ComponentProps) {
+  return (
+    <div>
+      <div className="flex flex-col py-20 justify-center items-center rounded-md bg-gradient-to-t from-background to-primary-10">
+        <h1 className="text-5xl font-bold">Leaderboard</h1>
+        <p className="text-2xl font-light text-foreground">
+          Top most poluar products on wemake
+        </p>
+      </div>
+    </div>
+  )
 }
