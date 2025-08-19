@@ -33,7 +33,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
     <div className="px-20 space-y-40">
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products ({loaderData.hello})</h2>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products</h2>
           <p className="text-xl font-light text-foreground">The best products made by our comunity today.</p>
           <Button variant="link" className="p-0" asChild>
             <Link to="/products/leaderboards">Explore all products &rarr;</Link>
