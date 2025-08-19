@@ -12,8 +12,13 @@ import { Badge } from "../components/ui/badge";
 import { Avatar } from "@radix-ui/react-avatar";
 import { AvatarFallback, AvatarImage } from "../components/ui/avatar";
 
+// @NOTICE: Loader funcdtion is executed on the server side.
+// @NOTICE: It runs before the component is rendered.
+// @NOTICE: It returns the data that will be passed to the component by the loaderData prop.
 export function loader({ request }: Route.LoaderArgs) {
-  return {};
+  return {
+    hello: "world",
+  };
 }
 
 export const meta: MetaFunction = () => {
@@ -28,7 +33,7 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
     <div className="px-20 space-y-40">
       <div className="grid grid-cols-3 gap-4">
         <div>
-          <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products</h2>
+          <h2 className="text-5xl font-bold leading-tight tracking-tight">Today's Products ({loaderData.hello})</h2>
           <p className="text-xl font-light text-foreground">The best products made by our comunity today.</p>
           <Button variant="link" className="p-0" asChild>
             <Link to="/products/leaderboards">Explore all products &rarr;</Link>
@@ -125,11 +130,11 @@ export default function HomePage({ loaderData }: Route.ComponentProps) {
             teamId={`team-${index}`}
             leaderUsername="dorbae"
             leaderAvatarUrl="https://github.com/dorbae.png"
-            positions={index === 0 
+            positions={index === 0
               ? ["React Developer", "Backend Developer", "Product Manager"]
               : ["UI/UX Designer", "DevOps Engineer"]
             }
-            projectDescription={index === 0 
+            projectDescription={index === 0
               ? "a new social media platform"
               : "an AI-powered productivity app"
             }
