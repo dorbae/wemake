@@ -28,15 +28,15 @@ export const links: Route.LinksFunction = () => [
 // @NOTICE: {children} will be replaced by the compoenent that is rendered by the route
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="light">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <Meta /> {/* @NOTICE: This is a React Router component that adds meta tags to the head of the document */}
         <Links /> {/* @NOTICE: This is a React Router component that adds links to the head of the document */}
       </head>
-      <body className="bg-background text-foreground min-h-screen">
-        {children}
+      <body>
+        <main className="px-20">{children}</main>
         <ScrollRestoration /> {/* @NOTICE: This is a React Router component that restores the scroll position when the user navigates back to a page */}
         <Scripts />
       </body>
