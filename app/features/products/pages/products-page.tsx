@@ -1,9 +1,9 @@
 import type { Route } from "../../../+types/routes";
-import type { MetaFunction } from "react-router";
+import { redirect, type MetaFunction } from "react-router";
 
 
 export function loader({ request }: Route.LoaderArgs) {
-  return {};
+  return redirect("/products/leaderboards");
 }
 
 export const meta: MetaFunction = () => {
