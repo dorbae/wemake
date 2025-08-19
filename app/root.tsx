@@ -35,8 +35,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta /> {/* @NOTICE: This is a React Router component that adds meta tags to the head of the document */}
         <Links /> {/* @NOTICE: This is a React Router component that adds links to the head of the document */}
       </head>
-      <body className="px-20">
-        {children}
+      <body>
+        <main className="px-20">{children}</main>
         <ScrollRestoration /> {/* @NOTICE: This is a React Router component that restores the scroll position when the user navigates back to a page */}
         <Scripts />
       </body>
