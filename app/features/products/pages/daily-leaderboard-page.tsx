@@ -1,9 +1,10 @@
 import { DateTime } from "luxon";
 import type { Route } from "../../../+types/root";
-import { data, isRouteErrorResponse, type MetaFunction } from "react-router";
+import { data, isRouteErrorResponse, Link, type MetaFunction } from "react-router";
 import { z } from "zod";
 import { HeroSection } from "~/common/components/hero-section";
 import { ProductCard } from "../components/product-card";
+import { Button } from "~/common/components/ui/button";
 
 const paramSchema = z.object({
   year: z.coerce.number().int().min(1900).max(2100),
@@ -53,15 +54,32 @@ export const meta: MetaFunction = () => {
 };
 
 export default function DailyLeaderboardPage({ loaderData }: Route.ComponentProps) {
-  const date = DateTime.fromObject({
+  const urlDate = DateTime.fromObject({
     year: loaderData.year,
     month: loaderData.month,
     day: loaderData.day,
   });
+  const previousDay = urlDate.minus({ days: 1 });
+  const nextDay = urlDate.plus({ days: 1 });
+  const isToday = urlDate.equals(DateTime.now().startOf("day"));
 
   return (
-    <div>
-      <HeroSection title={`The best products of ${date.toLocaleString(DateTime.DATETIME_MED)}`} description="" />
+    <div className="space-y-10">
+      <HeroSection title={`The best products of ${urlDate.toLocaleString(DateTime.DATE_MED)}`} description="" />
+      <div className="flex gap-2 items-center justify-center">
+        <Button variant="outline" asChild>
+          <Link to={`/products/leaderboards/daily/${previousDay.year}/${previousDay.month}/${previousDay.day}`}>
+            {previousDay.toLocaleString(DateTime.DATE_SHORT)} &larr;
+          </Link>
+        </Button>
+        {!isToday ? (
+          <Button variant="outline" asChild>
+            <Link to={`/products/leaderboards/daily/${nextDay.year}/${nextDay.month}/${nextDay.day}`}>
+              {nextDay.toLocaleString(DateTime.DATE_SHORT)} &rarr;
+            </Link>
+          </Button>
+        ) : null}
+      </div>
       <div className="space-y-5 w-full max-w-screen-md mx-auto">
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
