@@ -2,6 +2,8 @@ import { DateTime } from "luxon";
 import type { Route } from "../../../+types/root";
 import { data, isRouteErrorResponse, type MetaFunction } from "react-router";
 import { z } from "zod";
+import { HeroSection } from "~/common/components/hero-section";
+import { ProductCard } from "../components/product-card";
 
 const paramSchema = z.object({
   year: z.coerce.number().int().min(1900).max(2100),
@@ -37,7 +39,10 @@ export function loader({ request, params }: Route.LoaderArgs) {
       }
     );
   }
-  return { date };
+
+  return {
+    ...parsedParams,
+  };
 }
 
 export const meta: MetaFunction = () => {
@@ -48,8 +53,30 @@ export const meta: MetaFunction = () => {
 };
 
 export default function DailyLeaderboardPage({ loaderData }: Route.ComponentProps) {
-  console.log("aa");
-  return;
+  const date = DateTime.fromObject({
+    year: loaderData.year,
+    month: loaderData.month,
+    day: loaderData.day,
+  });
+
+  return (
+    <div>
+      <HeroSection title={`The best products of ${date.toLocaleString(DateTime.DATETIME_MED)}`} description="" />
+      <div className="space-y-5 w-full max-w-screen-md mx-auto">
+        {Array.from({ length: 5 }).map((_, index) => (
+          <ProductCard
+            key={index}
+            id={`product-${index}`}
+            name={`Product ${index + 1}`}
+            description={`This is the ${index + 1}th product description`}
+            commentsCount={12}
+            viewsCount={156}
+            votesCount={12}
+          />
+        ))}
+      </div>
+    </div>
+  )
 }
 
 // @NOTICE: Overriding root error boundary
