@@ -10,6 +10,7 @@ import {
 import type { Route } from "./+types/root";
 import "./app.css";
 import Navigation from "./common/components/ui/navigation";
+import { Settings } from "luxon";
 
 // @NOTICE: This is a React Router component that adds links to the head of the document
 export const links: Route.LinksFunction = () => [
@@ -27,6 +28,10 @@ export const links: Route.LinksFunction = () => [
 
 // @NOTICE: {children} will be replaced by the compoenent that is rendered by the route
 export function Layout({ children }: { children: React.ReactNode }) {
+  // @NOTICE: Set default locale and zone
+  Settings.defaultLocale = "ko";
+  Settings.defaultZone = "Asia/Seoul";
+
   return (
     <html lang="en" className="light">
       <head>

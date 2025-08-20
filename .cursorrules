@@ -49,3 +49,4 @@ Key Conventions
 Pull Request
 
 - Create PR followed by ./github/PR_EXAMPLES.md and pull_request_template.md
+- Create PR content on the file named PR_{branch}.md and create PR using `body-file` option and then delete the file.
