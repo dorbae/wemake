@@ -12,8 +12,11 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
     if (isNaN(page) || page < 1 || page > totalPages) {
         throw new Error("Invalid page number");
     }
-    const pageSize = 10;
-    const pageCount = Math.ceil(totalPages / pageSize);
+    const onClick = (page: number) => {
+        console.log("onClick", page);
+        searchParams.set("page", page.toString());
+        setSearchParams(searchParams, { preventScrollReset: true });
+    }
 
     return (
         <div>
@@ -21,19 +24,34 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
                 <PaginationContent>
                     {page === 1 ? null : <>
                         <PaginationItem>
-                            <PaginationPrevious to={`?page=${page - 1}`} />
+                            <PaginationPrevious to={`?page=${page - 1}`} onClick={(event) => {
+                                event.preventDefault();
+                                onClick(page - 1);
+                            }} />
                         </PaginationItem>
                         <PaginationItem>
-                            <PaginationLink to={`?page=${page - 1}`}>{page - 1}</PaginationLink>
+                            <PaginationLink to={`?page=${page - 1}`} onClick={(event) => {
+                                event.preventDefault();
+                                onClick(page - 1);
+                            }}>{page - 1}
+                            </PaginationLink>
                         </PaginationItem>
                     </>}
                     <PaginationItem>
-                        <PaginationLink to={`?page=${page}`} isActive>{page}</PaginationLink>
+                        <PaginationLink to={`?page=${page}`} isActive onClick={(event) => {
+                            event.preventDefault();
+                            onClick(page);
+                        }}>{page}
+                        </PaginationLink>
                     </PaginationItem>
                     {page === totalPages ? null : (
                         <>
                             <PaginationItem>
-                                <PaginationLink to={`?page=${page + 1}`} >{page + 1}</PaginationLink>
+                                <PaginationLink to={`?page=${page + 1}`} onClick={(event) => {
+                                    event.preventDefault();
+                                    onClick(page + 1);
+                                }}>{page + 1}
+                                </PaginationLink>
                             </PaginationItem>
                             {page + 1 === totalPages ? null :
                                 <>
@@ -43,7 +61,10 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
                                 </>
                             }
                             <PaginationItem>
-                                <PaginationNext to={`?page=${page + 1}`} />
+                                <PaginationNext to={`?page=${page + 1}`} onClick={(event) => {
+                                    event.preventDefault();
+                                    onClick(page + 1);
+                                }} />
                             </PaginationItem>
                         </>
                     )}
