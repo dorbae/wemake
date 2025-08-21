@@ -2,7 +2,7 @@ import * as React from "react"
 import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 
 import { cn } from "~/lib/utils"
-import { ButtonProps, buttonVariants } from "~/common/components/ui/button"
+import { buttonVariants } from "~/common/components/ui/button"
 import { Link } from "react-router"
 
 const Pagination = ({ className, ...props }: React.ComponentProps<"nav">) => (
@@ -34,6 +34,10 @@ const PaginationItem = React.forwardRef<
   <li ref={ref} className={cn("", className)} {...props} />
 ))
 PaginationItem.displayName = "PaginationItem"
+
+type ButtonProps = {
+  size?: "default" | "sm" | "lg" | "icon"
+}
 
 type PaginationLinkProps = {
   isActive?: boolean
