@@ -5,7 +5,7 @@ import { z } from "zod";
 import { HeroSection } from "~/common/components/hero-section";
 import { ProductCard } from "../components/product-card";
 import { Button } from "~/common/components/ui/button";
-import ProductPagination from "~/common/components/ui/product-pagination";
+import ProductPagination from "~/common/components/product-pagination";
 
 const paramSchema = z.object({
   year: z.coerce.number().int().min(1900).max(2100),
