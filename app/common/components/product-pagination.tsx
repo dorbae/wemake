@@ -19,19 +19,21 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
         <div>
             <Pagination>
                 <PaginationContent>
+                    {page === 1 ? null : <>
+                        <PaginationItem>
+                            <PaginationPrevious to={`?page=${page - 1}`} />
+                        </PaginationItem>
+                        <PaginationItem>
+                            <PaginationLink to={`?page=${page - 1}`}>{page - 1}</PaginationLink>
+                        </PaginationItem>
+                    </>}
                     <PaginationItem>
-                        <PaginationPrevious href="#" />
-                    </PaginationItem>
-                    {page === 1 ? null : <PaginationItem>
-                        <PaginationLink href="#">{page - 1}</PaginationLink>
-                    </PaginationItem>}
-                    <PaginationItem>
-                        <PaginationLink href="#" isActive>{page}</PaginationLink>
+                        <PaginationLink to={`?page=${page}`} isActive>{page}</PaginationLink>
                     </PaginationItem>
                     {page === totalPages ? null : (
                         <>
                             <PaginationItem>
-                                <PaginationLink href="#" >{page + 1}</PaginationLink>
+                                <PaginationLink to={`?page=${page + 1}`} >{page + 1}</PaginationLink>
                             </PaginationItem>
                             {page + 1 === totalPages ? null :
                                 <>
@@ -41,7 +43,7 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
                                 </>
                             }
                             <PaginationItem>
-                                <PaginationNext href="#" />
+                                <PaginationNext to={`?page=${page + 1}`} />
                             </PaginationItem>
                         </>
                     )}
