@@ -15,7 +15,7 @@ export default function ProductPagination({ totalPages }: ProductPaginationProps
     const onClick = (page: number) => {
         console.log("onClick", page);
         searchParams.set("page", page.toString());
-        setSearchParams(searchParams, { preventScrollReset: true });
+        setSearchParams(searchParams);
     }
 
     return (
