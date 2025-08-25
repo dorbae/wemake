@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Route } from "../../../+types/root";
+import type { Route } from "./+types/daily-leaderboard-page";
 import { data, isRouteErrorResponse, Link, type MetaFunction } from "react-router";
 import { z } from "zod";
 import { HeroSection } from "~/common/components/hero-section";
