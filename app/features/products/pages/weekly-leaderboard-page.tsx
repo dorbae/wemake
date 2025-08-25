@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import type { Route } from "../../../+types/root";
+import type { Route } from "./+types/weekly-leaderboard-page";
 import { data, isRouteErrorResponse, Link, type MetaFunction } from "react-router";
 import { z } from "zod";
 import { HeroSection } from "~/common/components/hero-section";
@@ -9,8 +9,7 @@ import ProductPagination from "~/common/components/product-pagination";
 
 const paramSchema = z.object({
   year: z.coerce.number().int().min(1900).max(2100),
-  month: z.coerce.number().int().min(1).max(12),
-  day: z.coerce.number().int().min(1).max(31),
+  week: z.coerce.number().int().min(1).max(52),
 });
 
 export function loader({ request, params }: Route.LoaderArgs) {
@@ -28,8 +27,12 @@ export function loader({ request, params }: Route.LoaderArgs) {
     );
   }
 
-  const date = DateTime.fromObject(parsedParams);
-  const today = DateTime.now().setZone("Asia/Seoul").startOf("day");
+  const date = DateTime.fromObject({
+    weekYear: parsedParams.year,
+    weekNumber: parsedParams.week,
+  });
+  const today = DateTime.now().setZone("Asia/Seoul").startOf("week");
+  console.log(date, today);
   if (date > today) {
     throw data(
       {
@@ -49,34 +52,33 @@ export function loader({ request, params }: Route.LoaderArgs) {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Daily Leaderboard - Wemake" },
-    { name: "description", content: "Top products of the day ranked by community engagement" }
+    { title: "Weekly Leaderboard - Wemake" },
+    { name: "description", content: "Top products of the week ranked by community engagement" }
   ];
 };
 
 export default function WeeklyLeaderboardPage({ loaderData }: Route.ComponentProps) {
   const urlDate = DateTime.fromObject({
-    year: loaderData.year,
-    month: loaderData.month,
-    day: loaderData.day,
+    weekYear: loaderData.year,
+    weekNumber: loaderData.week,
   });
-  const previousDay = urlDate.minus({ days: 1 });
-  const nextDay = urlDate.plus({ days: 1 });
-  const isToday = urlDate.equals(DateTime.now().startOf("day"));
+  const previousWeek = urlDate.minus({ weeks: 1 });
+  const nextWeek = urlDate.plus({ weeks: 1 });
+  const isToday = urlDate.equals(DateTime.now().startOf("week"));
 
   return (
     <div className="space-y-10">
-      <HeroSection title={`The best products of ${urlDate.toLocaleString(DateTime.DATE_MED)}`} description="" />
+      <HeroSection title={`The best of week ${urlDate.startOf("week").toLocaleString(DateTime.DATE_SHORT)} -  ${urlDate.endOf("week").toLocaleString(DateTime.DATE_SHORT)}`} description="" />
       <div className="flex gap-2 items-center justify-center">
         <Button variant="outline" asChild>
-          <Link to={`/products/leaderboards/daily/${previousDay.year}/${previousDay.month}/${previousDay.day}`}>
-            {previousDay.toLocaleString(DateTime.DATE_SHORT)} &larr;
+          <Link to={`/products/leaderboards/weekly/${previousWeek.year}/${previousWeek.weekNumber}`}>
+            {previousWeek.toLocaleString(DateTime.DATE_SHORT)} &larr;
           </Link>
         </Button>
         {!isToday ? (
           <Button variant="outline" asChild>
-            <Link to={`/products/leaderboards/daily/${nextDay.year}/${nextDay.month}/${nextDay.day}`}>
-              {nextDay.toLocaleString(DateTime.DATE_SHORT)} &rarr;
+            <Link to={`/products/leaderboards/weekly/${nextWeek.year}/${nextWeek.weekNumber}`}>
+              {nextWeek.toLocaleString(DateTime.DATE_SHORT)} &rarr;
             </Link>
           </Button>
         ) : null}
