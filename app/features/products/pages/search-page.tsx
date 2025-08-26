@@ -1,5 +1,5 @@
 import type { Route } from "../../../+types/routes";
-import type { MetaFunction } from "react-router";
+import { Form, type MetaFunction } from "react-router";
 import { Button } from "~/common/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/common/components/ui/card";
 import { Badge } from "~/common/components/ui/badge";
@@ -34,6 +34,10 @@ export default function SearchPage({ loaderData }: Route.ComponentProps) {
   return (
     <div className="space-y-10">
       <HeroSection title="Search Products" description="Search and discover amazing products" />
+      <Form className="flex justify-center max-w-screen-sm items-center mx-auto">
+        <Input name="query" placeholder="Search products" className="textlg" />
+        <Button type="submit">Search</Button>
+      </Form>
       <div className="space-y-5 w-full max-w-screen-md mx-auto">
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
