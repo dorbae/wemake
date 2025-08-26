@@ -50,10 +50,20 @@ export function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    month: Number(params.month),
+    // @NOTICE: Set default locale and zone because root layout setting is not applied to meta function
+  }).setZone("Asia/Seoul").setLocale("ko");
+
   return [
-    { title: "Monthly Leaderboard - Wemake" },
-    { name: "description", content: "Top products of the month ranked by community engagement" }
+    {
+      title: `The best of ${date.toLocaleString({
+        month: "long",
+        year: "2-digit",
+      })} | Wemake`
+    }
   ];
 };
 
@@ -71,10 +81,11 @@ export default function MonthlyLeaderboardPage({ loaderData }: Route.ComponentPr
       <HeroSection title={`The best of ${urlDate.toLocaleString({
         month: "long",
         year: "2-digit",
-      })}`} description="" />
+      })
+        }`} description="" />
       <div className="flex gap-2 items-center justify-center">
         <Button variant="outline" asChild>
-          <Link to={`/products/leaderboards/monthly/${previousMonth.year}/${previousMonth.month}`}>
+          <Link to={`/ products / leaderboards / monthly / ${previousMonth.year} / ${previousMonth.month}`}>
             {previousMonth.toLocaleString({
               month: "long",
               year: "2-digit",
@@ -83,7 +94,7 @@ export default function MonthlyLeaderboardPage({ loaderData }: Route.ComponentPr
         </Button>
         {!isToday ? (
           <Button variant="outline" asChild>
-            <Link to={`/products/leaderboards/monthly/${nextMonth.year}/${nextMonth.month}`}>
+            <Link to={`/ products / leaderboards / monthly / ${nextMonth.year} / ${nextMonth.month}`}>
               {nextMonth.toLocaleString({
                 month: "long",
                 year: "2-digit",
@@ -96,7 +107,7 @@ export default function MonthlyLeaderboardPage({ loaderData }: Route.ComponentPr
         {Array.from({ length: 5 }).map((_, index) => (
           <ProductCard
             key={index}
-            id={`product-${index}`}
+            id={`product - ${index}`}
             name={`Product ${index + 1}`}
             description={`This is the ${index + 1}th product description`}
             commentsCount={12}

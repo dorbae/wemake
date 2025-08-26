@@ -50,10 +50,15 @@ export function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    weekYear: Number(params.year),
+    weekNumber: Number(params.week),
+    // @NOTICE: Set default locale and zone because root layout setting is not applied to meta function
+  }).setZone("Asia/Seoul").setLocale("ko");
+
   return [
-    { title: "Weekly Leaderboard - Wemake" },
-    { name: "description", content: "Top products of the week ranked by community engagement" }
+    { title: `The best products of week ${date.startOf("week").toLocaleString(DateTime.DATE_SHORT)} -  ${date.endOf("week").toLocaleString(DateTime.DATE_SHORT)} | Wemake` }
   ];
 };
 

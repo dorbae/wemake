@@ -48,7 +48,7 @@ export function loader({ request, params }: Route.LoaderArgs) {
 }
 
 // @NOTICE: data is loader data
-export const meta: MetaFunction = ({ params, data }) => {
+export const meta: MetaFunction = ({ params }) => {
   const date = DateTime.fromObject({
     year: Number(params.year),
     month: Number(params.month),
