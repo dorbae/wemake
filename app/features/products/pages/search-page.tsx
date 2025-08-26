@@ -5,9 +5,20 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "~/com
 import { Badge } from "~/common/components/ui/badge";
 import { ProductCard } from "../components/product-card";
 import { Input } from "~/common/components/ui/input";
+import { z } from "zod";
+
+
+const paramSchema = z.object({
+  query: z.string().optional().default(""),
+  page: z.coerce.number().optional().default(1),
+});
 
 export function loader({ request }: Route.LoaderArgs) {
-  return {};
+  const url = new URL(request.url);
+  const { success, data: parsedData } = paramSchema.safeParse(Object.fromEntries(url.searchParams));
+  if (!success) {
+    throw new Error("Invalid parmas");
+  }
 }
 
 export const meta: MetaFunction = () => {
