@@ -48,10 +48,14 @@ export function loader({ request, params }: Route.LoaderArgs) {
   };
 }
 
-export const meta: MetaFunction = () => {
+export const meta: MetaFunction = ({ params }) => {
+  const date = DateTime.fromObject({
+    year: Number(params.year),
+    // @NOTICE: Set default locale and zone because root layout setting is not applied to meta function
+  }).setZone("Asia/Seoul").setLocale("ko");
+
   return [
-    { title: "Yearly Leaderboard - Wemake" },
-    { name: "description", content: "Top products of the year ranked by community engagement" }
+    { title: `The best of ${date.toLocaleString({ year: "numeric" })} | Wemake` }
   ];
 };
 
