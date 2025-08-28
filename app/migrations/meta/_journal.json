@@ -8,6 +8,13 @@
       "when": 1756393432433,
       "tag": "0000_yellow_mephistopheles",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1756396181308,
+      "tag": "0001_rapid_sauron",
+      "breakpoints": true
     }
   ]
 }
