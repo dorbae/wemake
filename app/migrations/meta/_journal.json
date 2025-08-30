@@ -15,6 +15,13 @@
       "when": 1756396181308,
       "tag": "0001_rapid_sauron",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1756440187894,
+      "tag": "0002_tired_sandman",
+      "breakpoints": true
     }
   ]
 }
