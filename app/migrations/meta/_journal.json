@@ -29,6 +29,13 @@
       "when": 1756558579330,
       "tag": "0003_open_eddie_brock",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1756560014574,
+      "tag": "0004_wealthy_puppet_master",
+      "breakpoints": true
     }
   ]
 }
