@@ -44,7 +44,7 @@ export function HeroSection({
 
   return (
     <div className={cn(
-      "flex flex-col justify-center items-center rounded-md",
+      "flex flex-col justify-center items-center rounded-md mb-10",
       sizeClasses[size],
       variantClasses[variant],
       className
