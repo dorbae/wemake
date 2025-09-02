@@ -25,7 +25,7 @@ export default function SubmitPage() {
   };
   return (
     <div>
-      <HeroSection
+      <HeroSection className="mb-10"
         title="Submit Your Product"
         description="Share your product with the world"
       />
